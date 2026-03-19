@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Perfect vs Past Simple - GIA School</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Battambang:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Battambang', sans-serif;
+            background-color: #f8fafc;
+        }
+        .khmer-font { font-family: 'Battambang', sans-serif; }
+        .hidden-section { display: none; }
+        .correct-answer { border-color: #10b981; background-color: #ecfdf5; }
+        .wrong-answer { border-color: #ef4444; background-color: #fef2f2; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white py-8 px-4 shadow-lg text-center">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-2">Present Perfect vs Past Simple</h1>
+        <p class="text-indigo-100 text-lg md:text-xl font-medium">Pre-Intermediate (B1)</p>
+    </header>
+
+    <main class="flex-grow container mx-auto max-w-4xl p-4 md:p-8">
+        
+        <!-- Welcome & Login Section -->
+        <section id="login-section" class="bg-white rounded-2xl shadow-xl p-8 text-center animate-fade-in">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 khmer-font">សូមស្វាគមន៍មកកាន់មេរៀនវេយ្យាករណ៍</h2>
+            <p class="text-gray-600 mb-6">Please enter your name to begin the lesson and quiz.</p>
+            <div class="max-w-xs mx-auto">
+                <input type="text" id="student-name" placeholder="Your Full Name" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-indigo-500 outline-none transition mb-4">
+                <button onclick="startApp()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-all transform hover:scale-105">
+                    Start Lesson
+                </button>
+            </div>
+        </section>
+
+        <!-- Lesson Content Section -->
+        <section id="lesson-section" class="hidden-section bg-white rounded-2xl shadow-xl p-6 md:p-10">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-indigo-700 border-b-2 border-indigo-100 pb-2 mb-4">Grammar Guide</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-5 rounded-xl">
+                        <h3 class="font-bold text-blue-800 mb-2">Past Simple</h3>
+                        <p class="text-sm text-gray-700 mb-2">Used for finished actions at a specific time in the past.</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            <li>Finished time (yesterday, in 2010)</li>
+                            <li>Narrating stories</li>
+                            <li>Finished habits</li>
+                        </ul>
+                        <p class="mt-3 text-sm font-semibold italic">"I went to Paris in 2015."</p>
+                    </div>
+                    <div class="bg-green-50 p-5 rounded-xl">
+                        <h3 class="font-bold text-green-800 mb-2">Present Perfect</h3>
+                        <p class="text-sm text-gray-700 mb-2">Connects past to present. Time is not specified.</p>
+                        <ul class="list-disc list-inside text-sm text-gray-600 space-y-1">
+                            <li>Experiences (ever/never)</li>
+                            <li>Recent actions (just/already)</li>
+                            <li>Unfinished time (today, this week)</li>
+                        </ul>
+                        <p class="mt-3 text-sm font-semibold italic">"I have been to Paris twice."</p>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="startQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-bold transition mx-auto block">
+                Start Quiz (30 Questions)
+            </button>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="hidden-section">
+            <div class="flex justify-between items-center mb-4">
+                <span id="user-display" class="font-semibold text-gray-700"></span>
+                <span id="progress-text" class="text-indigo-600 font-bold"></span>
+            </div>
+            
+            <div id="quiz-container" class="space-y-6">
+                <!-- Question will be injected here -->
+            </div>
+
+            <div class="mt-8 flex justify-between">
+                <button id="prev-btn" onclick="prevQuestion()" class="hidden bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2 rounded-lg transition font-medium">Previous</button>
+                <button id="next-btn" onclick="nextQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg transition font-medium ml-auto">Next</button>
+            </div>
+        </section>
+
+        <!-- Result Section -->
+        <section id="result-section" class="hidden-section bg-white rounded-2xl shadow-xl p-8 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Quiz Completed!</h2>
+            <p id="final-name" class="text-indigo-600 font-semibold text-xl mb-4"></p>
+            
+            <div class="inline-block bg-indigo-50 p-8 rounded-full mb-6">
+                <span id="final-score" class="text-5xl font-extrabold text-indigo-700">0/30</span>
+            </div>
+
+            <div id="grade-message" class="text-lg font-medium mb-8 text-gray-600"></div>
+
+            <button onclick="location.reload()" class="bg-gray-800 hover:bg-black text-white px-8 py-3 rounded-lg transition">
+                Retake Quiz
+            </button>
+            
+            <div class="mt-10 text-left border-t pt-6">
+                <h3 class="font-bold text-gray-700 mb-4">Review Answers:</h3>
+                <div id="review-container" class="space-y-4"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center mt-auto">
+        <p class="text-sm">© GIA School!</p>
+    </footer>
+
+    <script>
+        const questions = [
+            { q: "I ______ (be) to Paris three times.", options: ["was", "have been", "am"], correct: 1 },
+            { q: "She ______ (finish) her homework ten minutes ago.", options: ["finished", "has finished", "finishes"], correct: 0 },
+            { q: "______ you ______ (ever/eat) sushi?", options: ["Did / ever eat", "Have / ever eaten", "Do / ever eat"], correct: 1 },
+            { q: "They ______ (not/see) each other since 2010.", options: ["didn't see", "haven't seen", "don't see"], correct: 1 },
+            { q: "We ______ (watch) a great movie last night.", options: ["have watched", "watch", "watched"], correct: 2 },
+            { q: "My father ______ (work) in this bank for 20 years and he still works there.", options: ["worked", "has worked", "works"], correct: 1 },
+            { q: "I ______ (lose) my keys. I can't find them anywhere!", options: ["lost", "have lost", "was losing"], correct: 1 },
+            { q: "Where ______ you ______ (go) on holiday last summer?", options: ["did / go", "have / gone", "do / go"], correct: 0 },
+            { q: "She ______ (just/arrive) at the station.", options: ["just arrived", "has just arrived", "just arrives"], correct: 1 },
+            { q: "Shakespeare ______ (write) many famous plays.", options: ["has written", "writes", "wrote"], correct: 2 },
+            { q: "I ______ (never/be) to Cambodia before.", options: ["was never", "have never been", "never am"], correct: 1 },
+            { q: "They ______ (live) in London when they were young.", options: ["lived", "have lived", "live"], correct: 0 },
+            { q: "______ you ______ (see) the news today?", options: ["Did / see", "Have / seen", "Do / see"], correct: 1 },
+            { q: "He ______ (buy) a new car last week.", options: ["bought", "has bought", "buys"], correct: 0 },
+            { q: "I'm not hungry. I ______ (already/eat) lunch.", options: ["already ate", "have already eaten", "already eat"], correct: 1 },
+            { q: "When ______ (you/meet) your best friend?", options: ["have you met", "did you meet", "do you meet"], correct: 1 },
+            { q: "The weather ______ (be) very cold lately.", options: ["was", "has been", "is"], correct: 1 },
+            { q: "We ______ (not/have) a holiday for two years.", options: ["didn't have", "haven't had", "don't have"], correct: 1 },
+            { q: "I ______ (start) learning English five years ago.", options: ["have started", "started", "start"], correct: 1 },
+            { q: "______ (it/rain) yesterday?", options: ["Has it rained", "Did it rain", "Does it rain"], correct: 1 },
+            { q: "Oh no! I ______ (break) my phone.", options: ["broke", "have broken", "was breaking"], correct: 1 },
+            { q: "The postman ______ (not/come) yet.", options: ["didn't come", "hasn't come", "doesn't come"], correct: 1 },
+            { q: "We ______ (visit) our grandparents on Sunday.", options: ["visited", "have visited", "visit"], correct: 0 },
+            { q: "How long ______ (you/know) her?", options: ["did you know", "have you known", "do you know"], correct: 1 },
+            { q: "I ______ (see) that film before.", options: ["saw", "have seen", "am seeing"], correct: 1 },
+            { q: "They ______ (get) married in 2018.", options: ["got", "have got", "get"], correct: 0 },
+            { q: "She ______ (forget) her umbrella again.", options: ["forgot", "has forgotten", "forgets"], correct: 1 },
+            { q: "I ______ (not/see) you at the party last night.", options: ["haven't seen", "didn't see", "don't see"], correct: 1 },
+            { q: "______ (you/ever/try) Khmer food?", options: ["Did you ever try", "Have you ever tried", "Do you ever try"], correct: 1 },
+            { q: "I ______ (drink) three cups of coffee this morning.", options: ["drank", "have drunk", "drink"], correct: 1 }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let userName = "";
+
+        function startApp() {
+            const nameInput = document.getElementById('student-name').value;
+            if (nameInput.trim() === "") {
+                alert("Please enter your name to proceed.");
+                return;
+            }
+            userName = nameInput;
+            document.getElementById('login-section').classList.add('hidden-section');
+            document.getElementById('lesson-section').classList.remove('hidden-section');
+        }
+
+        function startQuiz() {
+            document.getElementById('lesson-section').classList.add('hidden-section');
+            document.getElementById('quiz-section').classList.remove('hidden-section');
+            document.getElementById('user-display').innerText = `Student: ${userName}`;
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('quiz-container');
+            const q = questions[currentQuestion];
+            
+            let optionsHtml = q.options.map((opt, index) => `
+                <button onclick="selectOption(${index})" 
+                    class="w-full text-left p-4 border-2 rounded-xl transition-all duration-200 
+                    ${userAnswers[currentQuestion] === index ? 'border-indigo-600 bg-indigo-50 shadow-md' : 'border-gray-100 hover:border-indigo-200 hover:bg-gray-50'}">
+                    <span class="inline-block w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 text-center leading-8 font-bold mr-3">${String.fromCharCode(65 + index)}</span>
+                    <span class="text-gray-700 font-medium">${opt}</span>
+                </button>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-md p-6 animate-fade-in">
+                    <p class="text-gray-500 text-sm mb-2">Question ${currentQuestion + 1} of ${questions.length}</p>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-6">${q.q}</h3>
+                    <div class="space-y-3">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('progress-text').innerText = `${Math.round(((currentQuestion + 1) / questions.length) * 100)}%`;
+            document.getElementById('prev-btn').style.display = currentQuestion === 0 ? 'none' : 'block';
+            document.getElementById('next-btn').innerText = currentQuestion === questions.length - 1 ? 'Finish Quiz' : 'Next';
+        }
+
+        function selectOption(index) {
+            userAnswers[currentQuestion] = index;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === null) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-section').classList.add('hidden-section');
+            document.getElementById('result-section').classList.remove('hidden-section');
+            
+            let score = 0;
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = "";
+
+            questions.forEach((q, i) => {
+                const isCorrect = userAnswers[i] === q.correct;
+                if (isCorrect) score++;
+
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `p-4 rounded-lg border-l-4 ${isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'}`;
+                reviewItem.innerHTML = `
+                    <p class="font-semibold text-gray-800">${i + 1}. ${q.q}</p>
+                    <p class="text-sm ${isCorrect ? 'text-green-700' : 'text-red-700'}">
+                        Your answer: ${q.options[userAnswers[i]]} ${isCorrect ? '✓' : '✗'}
+                    </p>
+                    ${!isCorrect ? `<p class="text-sm text-gray-600">Correct: ${q.options[q.correct]}</p>` : ''}
+                `;
+                reviewContainer.appendChild(reviewItem);
+            });
+
+            document.getElementById('final-name').innerText = userName;
+            document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+            
+            let message = "";
+            if (score === 30) message = "Perfect! You are a grammar master!";
+            else if (score >= 25) message = "Excellent work!";
+            else if (score >= 20) message = "Good job, but keep practicing!";
+            else message = "Keep studying and try again!";
+            
+            document.getElementById('grade-message').innerText = message;
+        }
+    </script>
+</body>
+</html>
